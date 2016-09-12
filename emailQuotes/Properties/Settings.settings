@@ -3,7 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="directoryPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Users\eddyizm\Documents\NppScripts</Value>
+      <Value Profile="(Default)">C:\YourFolder</Value>
+    </Setting>
+    <Setting Name="logPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\YourFolder\log.txt</Value>
     </Setting>
   </Settings>
 </SettingsFile>

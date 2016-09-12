@@ -19,26 +19,49 @@ namespace emailQuotes
 
         static void Main(string[] args)
         {
-            // file info
-            string fileDirectory = Properties.Settings.Default.directoryPath;
-            string[] fileArray = Directory.GetFiles(fileDirectory);
-            // variables to select file and quote
-            var guess = new Random();
 
-            if (fileArray != null)
-            {
-                int category = guess.Next(fileArray.Length);
+            // Check if directory exists
+            if (Directory.Exists(Properties.Settings.Default.directoryPath))
+            {   // file info
+                string fileDirectory = Properties.Settings.Default.directoryPath;
+                string[] fileArray = Directory.GetFiles(fileDirectory);
                 
-                var linePicker = File.ReadAllLines(fileArray[category]);
-                category = guess.Next(linePicker.Length);
-                emailMessage = linePicker[category].ToString();
-               
+                // variables to select file and quote
+                var guess = new Random();
+
+                // Verify files exist
+                if (fileArray != null)
+                {
+                    int category = guess.Next(fileArray.Length);
+
+                    var linePicker = File.ReadAllLines(fileArray[category]);
+                    category = guess.Next(linePicker.Length);
+                    emailMessage = linePicker[category].ToString();
+                }
+                else
+                {
+                    writeToLog(" Files not found.");
+                }
+
+                try
+                {
+                    sendXChangeMail(emailMessage);
+                }
+                catch (SmtpException ex)
+                {
+                    writeToLog(" SmtpException: " + ex.Message + " | StackTrace: " + ex.StackTrace);
+                }
+            }
+            else
+            {
+                writeToLog(" Directory not found.");
             }
 
-            sendhotMail(emailMessage);
+           
 
         }
 
+        // Send mail methods. 
         static void sendhotMail(string message)
         {
           
@@ -66,6 +89,16 @@ namespace emailQuotes
             // mMailMessage.To.Add(new MailAddress("moreEmailAddress@domain.com));
             client.Send(mMailMessage);
         }
+
+        // write to log 
+        static string logPath = Properties.Settings.Default.logPath;
+        // Must specify path and file name in setting
+        static void writeToLog(string message)
+        {
+            DateTime today = DateTime.Now;
+            File.AppendAllText(logPath, "\n" + today + " ErrorLog:" + message);
+        }
+
 
     }
 

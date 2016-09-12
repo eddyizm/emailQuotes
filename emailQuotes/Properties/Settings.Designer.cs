@@ -25,10 +25,19 @@ namespace emailQuotes.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\eddyizm\\Documents\\NppScripts")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\YourFolder")]
         public string directoryPath {
             get {
                 return ((string)(this["directoryPath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\YourFolder\\log.txt")]
+        public string logPath {
+            get {
+                return ((string)(this["logPath"]));
             }
         }
     }
