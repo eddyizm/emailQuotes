@@ -4,28 +4,24 @@ using System.Net.Mail;
 
 namespace emailQuotes
 {
-
-  
-     /*
-  *
-  * Creating a small console app to send random quotes via email daily. 
-  * 
- */
+    /*
+    *
+    * Creating a small console app to send random quotes via email daily. 
+    * 
+   */
 
     class Program
     {
-
         static string emailMessage;
 
         static void Main(string[] args)
         {
-
             // Check if directory exists
             if (Directory.Exists(Properties.Settings.Default.directoryPath))
             {   // file info
                 string fileDirectory = Properties.Settings.Default.directoryPath;
                 string[] fileArray = Directory.GetFiles(fileDirectory);
-                
+
                 // variables to select file and quote
                 var guess = new Random();
 
@@ -56,15 +52,11 @@ namespace emailQuotes
             {
                 writeToLog(" Directory not found.");
             }
-
-           
-
         }
 
         // Send mail methods. 
         static void sendhotMail(string message)
         {
-          
             MailMessage mMailMessage = new MailMessage();
             SmtpClient client = new SmtpClient("smtp.live.com");
             client.Port = 587;
@@ -96,16 +88,8 @@ namespace emailQuotes
         static void writeToLog(string message)
         {
             DateTime today = DateTime.Now;
-            File.AppendAllText(logPath, "\n" + today + " ErrorLog:" + message);
+            File.AppendAllText(logPath, "\n" + today + "| AppName: MoveFilesUp | ErrorLog: " + message);
         }
-
-
     }
 
-
 }
-
-
-
-
-
