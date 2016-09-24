@@ -41,7 +41,24 @@ namespace emailQuotes
 
                 try
                 {
-                    sendXChangeMail(emailMessage);
+                    // temporarily commented this out in order to load file data into database. worked great!
+                    //sendhotMail(emailMessage);
+                    
+                    // load a file of quotes !!
+                    var db = new sqlite();
+
+                    // write a single quote to DB.
+                    //dbCheck.AddQuote("love", emailMessage, DateTime.Now.ToString("yyyy-MM-dd"));
+
+                    // write file sending to method
+                    //db.Table = fileArray[6].ToString();
+
+                    // this one actually processes the file. Don't judge, this is my saturday morning. 
+                    db.AddQuoteFile(fileArray[5].ToString());
+
+                    // write results to log file. 
+                    writeToLog(" SQLite: " + db.Table);
+                    
                 }
                 catch (SmtpException ex)
                 {

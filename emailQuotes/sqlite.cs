@@ -19,10 +19,6 @@ namespace emailQuotes
         private string mDateAdd;
         private string mQuote;
         private string mCountDate;
-        private int mInventoryCountID;
-        private int mCount;
-        private int mRemoved;
-
 
         #endregion
 
